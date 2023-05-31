@@ -16,16 +16,22 @@ namespace Logic.DefaultECS
             world = _world;
             alive = world.GetEntities().With<TeamDC>().AsSet();
         }
-        
+
         public bool IsEnabled { get; set; } = true;
 
         public void Update(float state)
         {
             var aliveCount = alive.GetEntities().Length;
-            if (aliveCount < Data.MaxVehicleCount)
+            int vacantSlots = Data.MaxVehicleCount - aliveCount;
+            for (var i = 0; i < Data.MaxTeamCount; i++)
             {
-                Utils.SpawnVehicles(world, 1, 0);
-                Utils.SpawnVehicles(world, 1, 1);
+                if (vacantSlots == 0)
+                {
+                    break;
+                }
+
+                Utils.SpawnVehicles(world, 1, i);
+                vacantSlots--;
             }
         }
 

@@ -6,10 +6,14 @@ namespace Logic.DOD
     {
         public static void Run()
         {
-            if (Data.AliveCount < Data.MaxVehicleCount)
+            for (var i = 0; i < Data.MaxTeamCount; i++)
             {
-                Utils.SpawnVehicles(1, 0);
-                Utils.SpawnVehicles(1, 1);
+                if (Data.AliveCount == Data.MaxVehicleCount)
+                {
+                    break;
+                }
+
+                Utils.SpawnVehicles(1, i);
             }
         }
     }
