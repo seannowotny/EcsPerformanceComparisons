@@ -51,6 +51,7 @@ sysinfo.txt
 ApiUpdaterCheck.txt
 /UserSettings/*
 /[Aa]ssets/RiderFlow.UserData/*
+/Packages/packages-lock.json
 
 
 # GPU Cache

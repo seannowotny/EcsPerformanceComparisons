@@ -10,7 +10,7 @@ namespace Logic.DOD
 
         private void Update()
         {
-            float deltaTime = Time.deltaTime; // Not deterministic
+            float deltaTime = Time.deltaTime;
             SpawnVehiclesSystem.Run();
             EnemyTargetSystem.Run();
             VehicleMovementSystem.Run(deltaTime);

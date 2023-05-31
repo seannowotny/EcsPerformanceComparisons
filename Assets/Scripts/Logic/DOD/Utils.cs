@@ -19,7 +19,7 @@ namespace Logic.DOD
             {
                 // Data.VehicleAliveStatuses[i] = true;
                 Data.VehicleHealths[i] = 100;
-                Data.VehiclePositions[i] = new(Random.Range(0, 100), Random.Range(0, 100)); // Not deterministic
+                Data.VehiclePositions[i] = new(Random.Range(0, 100), Random.Range(0, 100));
                 Data.VehicleTargets[i] = -1;
                 Data.VehicleTeams[i] = teamIndex;
                 Data.TeamAliveCounts[teamIndex]++;

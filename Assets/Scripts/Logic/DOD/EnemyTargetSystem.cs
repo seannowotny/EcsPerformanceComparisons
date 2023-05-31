@@ -44,7 +44,7 @@ namespace Logic.DOD
                     int targetIndex;
                     do
                     {
-                        targetIndex = Random.Range(0, Data.AliveCount); // Not deterministic
+                        targetIndex = Random.Range(0, Data.AliveCount);
                         targetTeam = Data.VehicleTeams[targetIndex];
                     } while (targetTeam == currentTeam);
 

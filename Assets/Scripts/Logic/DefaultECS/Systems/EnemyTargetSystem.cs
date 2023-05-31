@@ -35,7 +35,7 @@ namespace Logic.DefaultECS
             {
                 if (ownTeamIndex.Value == i)
                 {
-                    enemyTeamAliveArr[i] = false; // Not a rival team
+                    enemyTeamAliveArr[i] = false; // Not an enemy team
                     continue;
                 }
 

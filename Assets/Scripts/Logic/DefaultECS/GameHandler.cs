@@ -32,7 +32,7 @@ namespace Logic.DefaultECS
 
         private void Update()
         {
-            sequentialSystem.Update(Time.deltaTime); // Not deterministic
+            sequentialSystem.Update(Time.deltaTime);
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -41,7 +41,7 @@ namespace Logic.DefaultECS
 
             if (Data.EnableRendering)
             {
-                renderSystem.Update(Time.deltaTime); // Not deterministic
+                renderSystem.Update(Time.deltaTime);
             }
         }
     }

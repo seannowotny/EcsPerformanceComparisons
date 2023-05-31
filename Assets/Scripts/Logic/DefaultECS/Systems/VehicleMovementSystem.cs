@@ -34,7 +34,7 @@ namespace Logic.DefaultECS
             }
                 
             var direction = math.normalize(targetPosition - currentPosition);
-            var newPosition = currentPosition + direction * speed * (float)_deltaTime; // Not deterministic
+            var newPosition = currentPosition + direction * speed * (float)_deltaTime;
             entity.Set(new PositionDC {Value = newPosition});
         }
     }

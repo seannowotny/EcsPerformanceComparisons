@@ -26,7 +26,7 @@ namespace Logic.DefaultECS
                 var targetHealth = targetEntity.Get<HealthDC>().Value;
                 targetEntity.Set(new HealthDC
                     {
-                        Value = targetHealth - Data.WeaponDamage * _deltaTime // Not deterministic
+                        Value = targetHealth - Data.WeaponDamage * _deltaTime
                     }
                 );
             }
