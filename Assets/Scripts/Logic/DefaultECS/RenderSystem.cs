@@ -38,7 +38,7 @@ namespace Logic.DefaultECS
             for (var i = 0; i < entitiesCount; i++)
             {
                 var position = nonce[i].Get<PositionDC>().Value;
-                transformPool[i].position = new Vector3((float) position.x, 0, (float) position.y);
+                transformPool[i].position = new Vector3(position.x, 0, position.y);
                 meshPool[i].enabled = true;
             }
 

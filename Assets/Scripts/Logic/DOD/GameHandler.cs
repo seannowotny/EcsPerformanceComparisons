@@ -13,8 +13,8 @@ namespace Logic.DOD
             float deltaTime = Time.deltaTime; // Not deterministic
             SpawnVehiclesSystem.Run();
             EnemyTargetSystem.Run();
-            VehicleMovementSystem.Run((float) deltaTime);
-            ShootSystem.Run((float) deltaTime);
+            VehicleMovementSystem.Run(deltaTime);
+            ShootSystem.Run(deltaTime);
             DieSystem.Run();
 
             if (Input.GetKeyUp(KeyCode.Space))
