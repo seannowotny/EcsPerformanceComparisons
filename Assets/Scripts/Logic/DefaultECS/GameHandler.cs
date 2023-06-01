@@ -9,6 +9,7 @@ namespace Logic.DefaultECS
     public class GameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
+        [SerializeField] private Material[] materials;
 
         private World world;
         private SequentialSystem<float> sequentialSystem;
@@ -26,7 +27,7 @@ namespace Logic.DefaultECS
                 new DieSystem(world)
             );
 
-            renderSystem = new RenderSystem(world, prefab);
+            renderSystem = new RenderSystem(world, prefab, materials);
             world.Subscribe(this);
         }
 

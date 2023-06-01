@@ -27,6 +27,8 @@ namespace Logic.DOD
                 Data.VehicleTargets[i] = -1;
                 Data.VehicleTeams[i] = teamIndex;
                 Data.TeamAliveCounts[teamIndex]++;
+                // Data.AliveTeamVehicleIndecies[teamIndex].Add(i);
+                Data.TeamAliveVehicles[teamIndex].Add(i);
                 Data.AliveCount++;
 
                 spawned++;

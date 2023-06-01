@@ -15,10 +15,15 @@ namespace Logic.DOD
                     continue;
                 }
 
-                var currentPosition = Data.VehiclePositions[i];
                 var currentTarget = Data.VehicleTargets[i];
+                if (currentTarget == -1)
+                {
+                    continue;
+                }
+
+                var currentPosition = Data.VehiclePositions[i];
                 var targetPosition = Data.VehiclePositions[currentTarget];
-                if(math.distance(currentPosition, targetPosition) <= Data.WeaponRange)
+                if (math.distance(currentPosition, targetPosition) <= Data.WeaponRange)
                 {
                     Data.VehicleHealths[currentTarget] -= Data.WeaponDamage * deltaTime;
                 }

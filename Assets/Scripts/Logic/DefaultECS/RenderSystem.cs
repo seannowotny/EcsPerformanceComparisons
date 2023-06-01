@@ -14,13 +14,15 @@ namespace Logic.DefaultECS
         private readonly GameObject prefab;
         private readonly World world;
         private readonly EntitySet entities;
+        private readonly Material[] materials;
 
         public bool IsEnabled { get; set; } = true;
 
-        public RenderSystem(World _world, GameObject _prefab)
+        public RenderSystem(World _world, GameObject _prefab, Material[] _materials)
         {
             world = _world;
             prefab = _prefab;
+            materials = _materials;
 
             entities = world.GetEntities().With<PositionDC>().AsSet();
             
@@ -40,6 +42,7 @@ namespace Logic.DefaultECS
                 var position = nonce[i].Get<PositionDC>().Value;
                 transformPool[i].position = new Vector3(position.x, 0, position.y);
                 meshPool[i].enabled = true;
+                meshPool[i].material = materials[nonce[i].Get<TeamDC>().Value];
             }
 
             for (var i = entitiesCount; i < Data.MaxVehicleCount; i++)

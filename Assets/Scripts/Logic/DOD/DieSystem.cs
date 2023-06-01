@@ -17,7 +17,10 @@
                 }
 
                 Data.VehicleAliveStatuses[i] = false;
-                Data.TeamAliveCounts[Data.VehicleTeams[i]]--;
+                var teamIndex = Data.VehicleTeams[i];
+                Data.TeamAliveCounts[teamIndex]--;
+                // Data.AliveTeamVehicleIndecies[teamIndex].Remove(i);
+                Data.TeamAliveVehicles[teamIndex].Remove(i);
                 Data.AliveCount--;
             }
         }

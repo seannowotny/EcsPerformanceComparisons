@@ -9,7 +9,7 @@ namespace Logic.DOD
         private static Transform[] transformPool = new Transform[Data.MaxVehicleCount];
         private static MeshRenderer[] meshPool = new MeshRenderer[Data.MaxVehicleCount];
 
-        public static void Run(GameObject prefab)
+        public static void Run(GameObject prefab, Material[] materials)
         {
             if (meshPool[0] == null)
             {
@@ -31,6 +31,7 @@ namespace Logic.DOD
                 var position = Data.VehiclePositions[i];
                 transformPool[i].position = new Vector3((float)position.x, 0, (float)position.y);
                 meshPool[i].enabled = true;
+                meshPool[i].material = materials[Data.VehicleTeams[i]];
             }
         }
     }

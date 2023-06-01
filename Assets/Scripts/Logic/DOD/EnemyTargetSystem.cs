@@ -30,30 +30,33 @@ namespace Logic.DOD
 
             if (!moreThanOneTeamAlive)
             {
+                for (var i = 0; i < Data.AliveCount; i++)
+                {
+                    Data.VehicleTargets[i] = -1;
+                }
+
                 return;
             }
 
             for (var i = 0; i < Data.AliveCount; i++)
             {
-                if (!Data.VehicleAliveStatuses[i])
+                var currentTargetIndex = Data.VehicleTargets[i];
+                if (currentTargetIndex != -1 && Data.VehicleAliveStatuses[currentTargetIndex])
                 {
                     continue;
                 }
 
-                var currentTargetIndex = Data.VehicleTargets[i];
-                if (currentTargetIndex == -1 || !Data.VehicleAliveStatuses[currentTargetIndex])
+                var currentTeam = Data.VehicleTeams[i];
+                int enemyTeamIndex = 0;
+                do
                 {
-                    var currentTeam = Data.VehicleTeams[i];
-                    int targetTeam;
-                    int targetIndex;
-                    do
-                    {
-                        targetIndex = Random.Range(0, Data.AliveCount); // Not deterministic
-                        targetTeam = Data.VehicleTeams[targetIndex];
-                    } while (targetTeam == currentTeam || !Data.VehicleAliveStatuses[targetIndex]);
+                    enemyTeamIndex = Random.Range(0, Data.MaxTeamCount);
+                } while (enemyTeamIndex == currentTeam || Data.TeamAliveVehicles[enemyTeamIndex].Count == 0);
 
-                    Data.VehicleTargets[i] = targetIndex;
-                }
+                var enemyTeamList = Data.TeamAliveVehicles[enemyTeamIndex];
+                int targetIndex = enemyTeamList[Random.Range(0, enemyTeamList.Count)];
+
+                Data.VehicleTargets[i] = targetIndex;
             }
         }
     }
