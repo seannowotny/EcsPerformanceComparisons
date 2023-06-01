@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,18 +14,31 @@ public class MainMenuUi : MonoBehaviour
         canvasGameObject.AddComponent<CanvasScaler>();
         canvasGameObject.AddComponent<GraphicRaycaster>();
 
+        List<(string, string)> buttonData = new()
+        {
+            ("DOD", "DOD"),
+            ("DefaultEcs", "DefaultEcs"),
+            ("Arch", "Arch"),
+            ("Unity ECS", "Ecs")
+        };
+
+        int y = 200;
+        for (var i = 0; i < buttonData.Count; i++)
+        {
+            PlaceButton(canvas, buttonData[i].Item1, buttonData[i].Item2, y);
+            y -= 120;
+        }
+    }
+
+    private void PlaceButton(Canvas canvas, string name, string scene, int y)
+    {
         // Create the first button
-        GameObject button1 = CreateButton("DOD", new Vector2(0, 50));
+        GameObject button1 = CreateButton(name, new Vector2(0, y));
         button1.transform.SetParent(canvas.transform, false);
         Button buttonComponent1 = button1.GetComponent<Button>();
-        buttonComponent1.onClick.AddListener(() => ChangeScene("DOD"));
-
-        // Create the second button
-        GameObject button2 = CreateButton("DefaultEcs", new Vector2(0, -50));
-        button2.transform.SetParent(canvas.transform, false);
-        Button buttonComponent2 = button2.GetComponent<Button>();
-        buttonComponent2.onClick.AddListener(() => ChangeScene("DefaultEcs"));
+        buttonComponent1.onClick.AddListener(() => ChangeScene(scene));
     }
+
 
     private GameObject CreateButton(string name, Vector2 position)
     {
