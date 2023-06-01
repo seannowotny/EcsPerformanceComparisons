@@ -16,9 +16,9 @@ namespace Logic.ECS.Systems
                 .GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
             
-            foreach (var (health, entity) in SystemAPI.Query<Components.HealthDC>().WithEntityAccess())
+            foreach (var (health, entity) in SystemAPI.Query<RefRO<Components.HealthDC>>().WithEntityAccess())
             {
-                if (health.Value <= 0)
+                if (health.ValueRO.Value <= 0)
                 {
                     ecb.DestroyEntity(entity);
                 }

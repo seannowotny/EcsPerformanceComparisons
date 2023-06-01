@@ -15,7 +15,7 @@ namespace Logic.ECS.Systems
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            query = state.GetEntityQuery(typeof(TeamDC));
+            query = SystemAPI.QueryBuilder().WithAll<TeamDC>().Build();
         }
 
         [BurstCompile]
@@ -27,10 +27,9 @@ namespace Logic.ECS.Systems
             {
                 teamCounts[team.Value]++;
             }
-
             var entities = query.ToEntityArray(Allocator.Temp);
 
-            foreach (var (target, ownTeam) in SystemAPI.Query<RefRW<TargetDC>, TeamDC>())
+            foreach (var (target, ownTeam) in SystemAPI.Query<RefRW<TargetDC>, RefRO<TeamDC>>())
             {
                 if (SystemAPI.Exists(target.ValueRO.Value))
                 {
@@ -40,11 +39,11 @@ namespace Logic.ECS.Systems
                 bool aliveEnemyTeamExists = false;
                 for (var i = 0; i < DefaultECS.Data.MaxTeamCount; i++)
                 {
-                    if (i == ownTeam.Value)
+                    if (i == ownTeam.ValueRO.Value)
                     {
                         continue;
                     }
-                    else if (teamCounts[ownTeam.Value] > 0)
+                    else if (teamCounts[ownTeam.ValueRO.Value] > 0)
                     {
                         aliveEnemyTeamExists = true;
                         break;
@@ -60,7 +59,7 @@ namespace Logic.ECS.Systems
                 do
                 {
                     targetEntity = entities[randomSingleton.Random.NextInt(0, entities.Length)];
-                } while (SystemAPI.GetComponent<TeamDC>(targetEntity).Value == ownTeam.Value);
+                } while (SystemAPI.GetComponent<TeamDC>(targetEntity).Value == ownTeam.ValueRO.Value);
 
                 target.ValueRW = new() {Value = targetEntity};
             }

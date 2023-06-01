@@ -15,17 +15,17 @@ namespace Logic.ECS.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (currentPosition, target) in SystemAPI.Query<PositionDC, TargetDC>())
+            foreach (var (currentPosition, target) in SystemAPI.Query<RefRO<PositionDC>, RefRO<TargetDC>>())
             {
-                var targetPosition = SystemAPI.GetComponent<PositionDC>(target.Value);
-                if (math.distance(currentPosition.Value, targetPosition.Value) <= Data.WeaponRange)
+                var targetPosition = SystemAPI.GetComponent<PositionDC>(target.ValueRO.Value);
+                if (math.distance(currentPosition.ValueRO.Value, targetPosition.Value) <= Data.WeaponRange)
                 {
-                    var targetHealth = SystemAPI.GetComponent<HealthDC>(target.Value).Value;
+                    var targetHealth = SystemAPI.GetComponent<HealthDC>(target.ValueRO.Value).Value;
                     SystemAPI.SetComponent(
-                        target.Value,
+                        target.ValueRO.Value,
                         new HealthDC
                         {
-                            Value = targetHealth - Data.WeaponDamage * Time.captureDeltaTime
+                            Value = targetHealth - Data.WeaponDamage * SystemAPI.Time.DeltaTime
                         }
                     );
                 }

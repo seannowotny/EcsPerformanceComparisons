@@ -4,7 +4,6 @@ using Logic.ECS.Components;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Logic.ECS.Systems
 {
@@ -16,9 +15,9 @@ namespace Logic.ECS.Systems
         public void OnUpdate(ref SystemState state)
         {
             float speed = 5;
-            foreach (var (target, position)in SystemAPI.Query<TargetDC, RefRW<PositionDC>>())
+            foreach (var (target, position) in SystemAPI.Query<RefRO<TargetDC>, RefRW<PositionDC>>())
             {
-                var targetEntity = target.Value;
+                var targetEntity = target.ValueRO.Value;
                 if (targetEntity == default)
                 {
                     continue;
@@ -33,7 +32,7 @@ namespace Logic.ECS.Systems
                 }
 
                 var direction = math.normalize(targetPosition - currentPosition);
-                var newPosition = currentPosition + direction * speed * Time.captureDeltaTime;
+                var newPosition = currentPosition + direction * speed * SystemAPI.Time.DeltaTime;
                 position.ValueRW = new PositionDC {Value = newPosition};
             }
         }
