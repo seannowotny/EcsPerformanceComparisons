@@ -1,8 +1,9 @@
-﻿// Copyright (c) Sean Nowotny
+// Copyright (c) Sean Nowotny
 
 using System;
 using DefaultEcs;
 using DefaultEcs.System;
+using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
 using Random = UnityEngine.Random;
 

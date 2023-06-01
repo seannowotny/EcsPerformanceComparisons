@@ -1,4 +1,5 @@
-﻿// Copyright (c) Sean Nowotny
+// Copyright (c) Sean Nowotny
+
 
 using DefaultEcs;
 
