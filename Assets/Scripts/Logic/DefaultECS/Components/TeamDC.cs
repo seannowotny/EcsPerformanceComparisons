@@ -1,4 +1,4 @@
-﻿// Copyright (c) Sean Nowotny
+// Copyright (c) Sean Nowotny
 
 namespace Logic.DefaultECS.Components
 {

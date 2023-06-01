@@ -10,17 +10,27 @@ namespace Logic.DOD
         {
             for (var i = 0; i < Data.AliveCount; i++)
             {
-                float speed = 5;
+                if (!Data.VehicleAliveStatuses[i])
+                {
+                    continue;
+                }
+
+                var currentTarget = Data.VehicleTargets[i];
+                if (currentTarget == -1)
+                {
+                    continue;
+                }
+
                 var currentPosition = Data.VehiclePositions[i];
-                var targetPosition = Data.VehiclePositions[Data.VehicleTargets[i]];
-                
+                var targetPosition = Data.VehiclePositions[currentTarget];
+
                 if (math.distance(currentPosition, targetPosition) < Data.WeaponRange)
                 {
                     continue;
                 }
-                
+
                 var direction = math.normalize(targetPosition - currentPosition);
-                var newPosition = currentPosition + direction * speed * deltaTime;
+                var newPosition = currentPosition + direction * Data.VehicleSpeed * deltaTime;
                 Data.VehiclePositions[i] = newPosition;
             }
         }

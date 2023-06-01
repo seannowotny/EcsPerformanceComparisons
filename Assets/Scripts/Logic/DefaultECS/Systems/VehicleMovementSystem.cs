@@ -1,7 +1,8 @@
-﻿// Copyright (c) Sean Nowotny
+// Copyright (c) Sean Nowotny
 
 using DefaultEcs;
 using DefaultEcs.System;
+using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
 using Unity.Mathematics;
 
@@ -18,7 +19,6 @@ namespace Logic.DefaultECS
 
         protected override void Update(float _deltaTime, in Entity entity)
         {
-            float speed = 5;
             var targetEntity = entity.Get<TargetDC>().Value;
             if (targetEntity == default)
             {
@@ -34,7 +34,7 @@ namespace Logic.DefaultECS
             }
                 
             var direction = math.normalize(targetPosition - currentPosition);
-            var newPosition = currentPosition + direction * speed * (float)_deltaTime;
+            var newPosition = currentPosition + direction * Data.VehicleSpeed * (float)_deltaTime; // Not deterministic
             entity.Set(new PositionDC {Value = newPosition});
         }
     }

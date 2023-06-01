@@ -6,50 +6,57 @@ namespace Logic.DOD
 {
     public class EnemyTargetSystem
     {
-        private static bool[] otherTeamAliveArr = new bool[Data.MaxTeamCount];
-
         public static void Run()
         {
-            for (var i = 0; i < Data.MaxTeamCount; i++)
+            bool moreThanOneTeamAlive = false;
+
             {
-                bool otherTeamAlive = false;
+                int aliveTeams = 0;
                 for (var k = 0; k < Data.TeamAliveCounts.Length; k++)
                 {
-                    if (k == i)
+                    if (Data.TeamAliveCounts[k] == 0)
                     {
                         continue;
                     }
 
-                    if (Data.TeamAliveCounts[k] > 0)
+                    aliveTeams++;
+                    if (aliveTeams > 1)
                     {
-                        otherTeamAlive = true;
+                        moreThanOneTeamAlive = true;
                         break;
                     }
                 }
+            }
 
-                otherTeamAliveArr[i] = otherTeamAlive;
+            if (!moreThanOneTeamAlive)
+            {
+                for (var i = 0; i < Data.AliveCount; i++)
+                {
+                    Data.VehicleTargets[i] = -1;
+                }
+
+                return;
             }
 
             for (var i = 0; i < Data.AliveCount; i++)
             {
-                if (!otherTeamAliveArr[Data.VehicleTeams[i]])
+                var currentTargetIndex = Data.VehicleTargets[i];
+                if (currentTargetIndex != -1 && Data.VehicleAliveStatuses[currentTargetIndex])
                 {
                     continue;
                 }
 
-                if (Data.VehicleTargets[i] == -1 || Data.VehicleTargets[i] > Data.AliveCount - 1)
+                var currentTeam = Data.VehicleTeams[i];
+                int enemyTeamIndex = 0;
+                do
                 {
-                    var currentTeam = Data.VehicleTeams[i];
-                    int targetTeam;
-                    int targetIndex;
-                    do
-                    {
-                        targetIndex = Random.Range(0, Data.AliveCount);
-                        targetTeam = Data.VehicleTeams[targetIndex];
-                    } while (targetTeam == currentTeam);
+                    enemyTeamIndex = Random.Range(0, Data.MaxTeamCount);
+                } while (enemyTeamIndex == currentTeam || Data.TeamAliveVehicles[enemyTeamIndex].Count == 0);
 
-                    Data.VehicleTargets[i] = targetIndex;
-                }
+                var enemyTeamList = Data.TeamAliveVehicles[enemyTeamIndex];
+                int targetIndex = enemyTeamList[Random.Range(0, enemyTeamList.Count)];
+
+                Data.VehicleTargets[i] = targetIndex;
             }
         }
     }
