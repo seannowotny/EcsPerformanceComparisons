@@ -10,6 +10,11 @@ namespace Logic.DOD
         {
             for (var i = 0; i < Data.AliveCount; i++)
             {
+                if (!Data.VehicleAliveStatuses[i])
+                {
+                    continue;
+                }
+
                 float speed = 5;
                 var currentPosition = Data.VehiclePositions[i];
                 var targetPosition = Data.VehiclePositions[Data.VehicleTargets[i]];

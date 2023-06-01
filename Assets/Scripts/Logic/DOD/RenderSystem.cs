@@ -20,16 +20,17 @@ namespace Logic.DOD
                 }
             }
 
-            for (var i = 0; i < Data.AliveCount; i++)
+            for (var i = 0; i < Data.VehiclePositions.Length; i++)
             {
+                if (!Data.VehicleAliveStatuses[i])
+                {
+                    meshPool[i].enabled = false;
+                    continue;
+                }
+
                 var position = Data.VehiclePositions[i];
                 transformPool[i].position = new Vector3((float)position.x, 0, (float)position.y);
                 meshPool[i].enabled = true;
-            }
-
-            for (var i = Data.AliveCount; i < Data.MaxVehicleCount; i++)
-            {
-                meshPool[i].enabled = false;
             }
         }
     }

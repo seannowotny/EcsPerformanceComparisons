@@ -6,38 +6,42 @@ namespace Logic.DOD
 {
     public class EnemyTargetSystem
     {
-        private static bool[] otherTeamAliveArr = new bool[Data.MaxTeamCount];
-
         public static void Run()
         {
-            for (var i = 0; i < Data.MaxTeamCount; i++)
+            bool moreThanOneTeamAlive = false;
+
             {
-                bool otherTeamAlive = false;
+                int aliveTeams = 0;
                 for (var k = 0; k < Data.TeamAliveCounts.Length; k++)
                 {
-                    if (k == i)
+                    if (Data.TeamAliveCounts[k] == 0)
                     {
                         continue;
                     }
 
-                    if (Data.TeamAliveCounts[k] > 0)
+                    aliveTeams++;
+                    if (aliveTeams > 1)
                     {
-                        otherTeamAlive = true;
+                        moreThanOneTeamAlive = true;
                         break;
                     }
                 }
+            }
 
-                otherTeamAliveArr[i] = otherTeamAlive;
+            if (!moreThanOneTeamAlive)
+            {
+                return;
             }
 
             for (var i = 0; i < Data.AliveCount; i++)
             {
-                if (!otherTeamAliveArr[Data.VehicleTeams[i]])
+                if (!Data.VehicleAliveStatuses[i])
                 {
                     continue;
                 }
 
-                if (Data.VehicleTargets[i] == -1 || Data.VehicleTargets[i] > Data.AliveCount - 1)
+                var currentTargetIndex = Data.VehicleTargets[i];
+                if (currentTargetIndex == -1 || !Data.VehicleAliveStatuses[currentTargetIndex])
                 {
                     var currentTeam = Data.VehicleTeams[i];
                     int targetTeam;
@@ -46,7 +50,7 @@ namespace Logic.DOD
                     {
                         targetIndex = Random.Range(0, Data.AliveCount); // Not deterministic
                         targetTeam = Data.VehicleTeams[targetIndex];
-                    } while (targetTeam == currentTeam);
+                    } while (targetTeam == currentTeam || !Data.VehicleAliveStatuses[targetIndex]);
 
                     Data.VehicleTargets[i] = targetIndex;
                 }

@@ -11,10 +11,12 @@ namespace Logic.DOD
         private void Update()
         {
             float deltaTime = Time.deltaTime; // Not deterministic
-            SpawnVehiclesSystem.Run();
+            
             EnemyTargetSystem.Run();
             VehicleMovementSystem.Run(deltaTime);
             ShootSystem.Run(deltaTime);
+            
+            SpawnVehiclesSystem.Run();
             DieSystem.Run();
 
             if (Input.GetKeyUp(KeyCode.Space))
