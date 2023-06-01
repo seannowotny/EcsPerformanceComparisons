@@ -371,6 +371,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 59.856, y: 0, z: 0}
+--- !u!1 &767602696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767602698}
+  - component: {fileID: 767602697}
+  m_Layer: 0
+  m_Name: EcsBootstrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &767602697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767602696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a08f3222be642a69cf69943cf258cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &767602698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767602696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159789662
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +669,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5636059894655103306, guid: 972bfc7110cf1e444a3f0d6b8fbc19f4, type: 3}
+  Materials:
+  - {fileID: 2100000, guid: 6029f87d62089c04396c172b1d563013, type: 2}
+  - {fileID: 2100000, guid: 284c1029e647bc84da2737bfe0d2b9dd, type: 2}
+  - {fileID: 2100000, guid: 1195c2fe804c45742807b8e2519cb6e1, type: 2}
+  - {fileID: 2100000, guid: 8def729195c8b914d8832e98f7089c70, type: 2}
 --- !u!4 &2089375597
 Transform:
   m_ObjectHideFlags: 0

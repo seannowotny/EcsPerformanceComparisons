@@ -33,6 +33,10 @@ namespace Logic.ECS.Systems
             {
                 var position = EntityManager.GetComponentData<PositionDC>(entities[i]).Value;
                 transformPool[i].position = new Vector3(position.x, 0, position.y);
+                
+                int team = EntityManager.GetComponentData<TeamDC>(entities[i]).Value;
+                meshPool[i].material = ManagedDataProvider.Instance.Materials[team];
+                
                 meshPool[i].enabled = true;
             }
 
