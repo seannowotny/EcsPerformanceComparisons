@@ -1,13 +1,24 @@
 # ECS Performance Comparisons
 
-Project to compare data-oriented design and various ECS libraries.
+This Unity project is dedicated to comparing data-oriented design and various Entity Component System (ECS) libraries in the context of rapid prototyping.
 
-Inspired by the [Combat Bee Benchmarks](https://github.com/maskrosen/combat-bees-benchmarks).
+The implementations emphasize simplicity and productivity over highly optimized, boilerplate heavy solutions.
 
-Comparisons between different ECS libraries favour simplicity and productivity over boilerplate heavy, multithreaded solutions. This project sacrifices runtime performance in favour of elegance.
+Rendering systems are currently GameObject-based and slow, but can be disabled by pressing the space bar.
 
-Rendering system performance isn't of concern. The rendering systems can be disabled by pressing the space bar.
+## Currently Included Showcase Scenes
 
-## Video Demo
+- DOD (inspired by [Combat Bee Benchmarks](https://github.com/maskrosen/combat-bees-benchmarks))
+- DefaultECS
+- Arch
+- Unity ECS
+
+## Video Demonstration
 
 [![Video Demo](https://img.youtube.com/vi/rrW4-jHXLG0/0.jpg)](https://www.youtube.com/watch?v=rrW4-jHXLG0)
+
+## This project is looking for contributors!
+
+It would be awesome if this project could make a more fair and comprehensive comparison between different data-oriented game development approaches in the future.
+
+Take a look at our [issues page](https://github.com/seannowotny/EcsPerformanceComparisons/issues) if you want to participate in working towards this goal!
