@@ -21,4 +21,4 @@ Rendering systems are currently GameObject-based and slow, but can be disabled b
 
 It would be awesome if **ECS Performance Comparisons** could make a more fair and comprehensive comparison between different data-oriented game development approaches in the future.
 
-Take a look at our [issues page](https://github.com/seannowotny/EcsPerformanceComparisons/issues) if you want to participate in working towards this goal!
+Take a look at our [issues page](https://github.com/seannowotny/EcsPerformanceComparisons/issues) if you would like to participate in working towards this goal!
