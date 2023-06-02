@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.tayx.graphy": "https://github.com/Tayx94/graphy.git",
     "com.unity.entities": "1.0.8",
     "com.unity.collab-proxy": "2.0.4",
