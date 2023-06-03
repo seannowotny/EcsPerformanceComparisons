@@ -17,6 +17,7 @@ public class MainMenuUi : MonoBehaviour
         List<(string, string)> buttonData = new()
         {
             ("DOD", "DOD"),
+            ("Bursted DOD", "BurstedDOD"),
             ("DefaultEcs", "DefaultEcs"),
             ("Arch", "Arch"),
             ("Unity ECS", "Ecs")

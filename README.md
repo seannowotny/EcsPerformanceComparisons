@@ -9,6 +9,7 @@ Rendering systems are currently GameObject-based and slow, but can be disabled b
 ## Currently Included Showcase Scenes
 
 - DOD (inspired by [Combat Bee Benchmarks](https://github.com/maskrosen/combat-bees-benchmarks))
+- Bursted DOD
 - DefaultECS
 - Arch
 - Unity ECS
