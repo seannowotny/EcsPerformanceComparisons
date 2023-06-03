@@ -10,6 +10,7 @@ Rendering systems are currently GameObject-based and slow, but can be disabled b
 
 - DOD (inspired by [Combat Bee Benchmarks](https://github.com/maskrosen/combat-bees-benchmarks))
 - Bursted DOD
+- AoS DOD (array of structs architecture)
 - DefaultECS
 - Arch
 - Unity ECS
