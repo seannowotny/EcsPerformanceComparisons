@@ -4,8 +4,26 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Mathematics;
 
-namespace Logic.BurstedDOD
+namespace Logic.BurstedAosDOD
 {
+    public struct Vehicle
+    {
+        public Vehicle(Vehicle vehicle)
+        {
+            Position = vehicle.Position;
+            Health = vehicle.Health;
+            Team = vehicle.Team;
+            TargetIndex = vehicle.TargetIndex;
+            IsAlive = vehicle.IsAlive;
+        }
+        
+        public float2 Position;
+        public float Health;
+        public int Team;
+        public int TargetIndex;
+        public bool IsAlive;
+    }
+    
     [BurstCompile]
     public struct Data : IDisposable
     {
@@ -18,11 +36,7 @@ namespace Logic.BurstedDOD
         [MarshalAs(UnmanagedType.U1)] public bool EnableRendering;
         public int AliveCount;
 
-        public NativeArray<float2> VehiclePositions;
-        public NativeArray<float> VehicleHealths;
-        public NativeArray<int> VehicleTeams;
-        public NativeArray<int> VehicleTargets;
-        public NativeArray<bool> VehicleAliveStatuses;
+        public NativeArray<Vehicle> Vehicles;
 
         public NativeArray<int> TeamAliveCounts;
 
@@ -36,11 +50,7 @@ namespace Logic.BurstedDOD
             Team3AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
             EnableRendering = enabledRendering;
             AliveCount = 0;
-            VehiclePositions = new NativeArray<float2>(MaxVehicleCount, Allocator.Persistent);
-            VehicleHealths = new NativeArray<float>(MaxVehicleCount, Allocator.Persistent);
-            VehicleTeams = new NativeArray<int>(MaxVehicleCount, Allocator.Persistent);
-            VehicleTargets = new NativeArray<int>(MaxVehicleCount, Allocator.Persistent);
-            VehicleAliveStatuses = new NativeArray<bool>(MaxVehicleCount, Allocator.Persistent);
+            Vehicles = new NativeArray<Vehicle>(MaxVehicleCount, Allocator.Persistent);
             TeamAliveCounts = new NativeArray<int>(MaxTeamCount, Allocator.Persistent);
             Team0AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
             Team1AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
@@ -49,11 +59,7 @@ namespace Logic.BurstedDOD
 
         public void Dispose()
         {
-            VehiclePositions.Dispose();
-            VehicleHealths.Dispose();
-            VehicleTeams.Dispose();
-            VehicleTargets.Dispose();
-            VehicleAliveStatuses.Dispose();
+            Vehicles.Dispose();
             TeamAliveCounts.Dispose();
             Team0AliveVehicles.Dispose();
             Team1AliveVehicles.Dispose();

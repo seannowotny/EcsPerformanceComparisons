@@ -1,19 +1,10 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 
-namespace Logic.aosDOD
+namespace Logic.AosDOD
 {
     public struct Vehicle
     {
-        // public Vehicle(Vehicle _vehicle)
-        // {
-        //     Position = _vehicle.Position;
-        //     Health = _vehicle.Health;
-        //     Team = _vehicle.Team;
-        //     Target = _vehicle.Target;
-        //     
-        // }
-        
         public float2 Position;
         public float Health;
         public int Team;

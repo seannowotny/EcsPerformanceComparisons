@@ -1,4 +1,4 @@
-﻿namespace Logic.aosDOD
+﻿namespace Logic.AosDOD
 {
     public class DieSystem
     {
