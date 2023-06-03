@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/DOD.unity
     guid: 08b6835f217193b4c98f8fe5d987dd51
   - enabled: 1
+    path: Assets/Scenes/UnityDOD.unity
+    guid: aec069e935e3b754485bd6a4b846dd98
+  - enabled: 1
+    path: Assets/Scenes/BurstedDOD.unity
+    guid: 2f0041dcc01cfa04bbe46fc93d4d16ca
+  - enabled: 1
     path: Assets/Scenes/DefaultEcs.unity
     guid: ec5652ca7958a964bb777b93d75fb820
   - enabled: 1
