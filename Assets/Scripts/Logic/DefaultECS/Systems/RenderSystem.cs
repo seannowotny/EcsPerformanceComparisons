@@ -2,9 +2,7 @@
 
 using DefaultEcs;
 using DefaultEcs.System;
-using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
-using Unity.Entities;
 using UnityEngine;
 using World = DefaultEcs.World;
 
