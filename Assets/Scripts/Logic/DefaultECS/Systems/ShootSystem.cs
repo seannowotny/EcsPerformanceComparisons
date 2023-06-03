@@ -21,6 +21,10 @@ namespace Logic.DefaultECS
         {
             var currentPosition = entity.Get<PositionDC>().Value;
             var targetEntity = entity.Get<TargetDC>().Value;
+            if (!targetEntity.IsAlive)
+            {
+                return;
+            }
             var targetPosition = targetEntity.Get<PositionDC>().Value;
             if (math.distance(currentPosition, targetPosition) <= Data.WeaponRange)
             {

@@ -2,7 +2,6 @@
 
 using DefaultEcs;
 using DefaultEcs.System;
-using Logic.DefaultECS;
 using UnityEngine;
 
 namespace Logic.DefaultECS
@@ -11,6 +10,7 @@ namespace Logic.DefaultECS
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
+        [SerializeField] private Material sirenLightMaterial;
 
         private World world;
         private SequentialSystem<float> sequentialSystem;
@@ -24,11 +24,14 @@ namespace Logic.DefaultECS
                 new SpawnVehiclesSystem(world),
                 new EnemyTargetSystem(world),
                 new VehicleMovementSystem(world),
+                new SwitchSirenLightOnSystem(world),
+                new SwitchSirenLightOffSystem(world),
+                new DecrementTimersSystem(world),
                 new ShootSystem(world),
                 new DieSystem(world)
             );
 
-            renderSystem = new RenderSystem(world, prefab, materials);
+            renderSystem = new RenderSystem(world, prefab, materials, sirenLightMaterial);
             world.Subscribe(this);
         }
 

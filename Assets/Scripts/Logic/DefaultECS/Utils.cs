@@ -17,6 +17,7 @@ namespace Logic.DefaultECS
                 vehicle.Set(new TeamDC {Value = teamIndex});
                 vehicle.Set(new TargetDC {Value = default});
                 vehicle.Set(new HealthDC {Value = 100});
+                vehicle.Set<TimeUntilSirenSwitch>();
             }
         }
     }
