@@ -2,7 +2,7 @@
 
 using Unity.Burst;
 
-namespace Logic.BurstedDOD
+namespace Logic.BurstedAosDOD
 {
     [BurstCompile]
     public static class StaticGameHandler

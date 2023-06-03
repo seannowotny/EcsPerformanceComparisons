@@ -4,8 +4,9 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using Unity.Mathematics;
 
-namespace Logic.BurstedDOD
+namespace Logic.BurstedAosDOD
 {
     [BurstCompile]
     public static class Utils
@@ -23,16 +24,21 @@ namespace Logic.BurstedDOD
 
             for (var i = 0; i < Data.MaxVehicleCount; i++)
             {
-                if (data.VehicleAliveStatuses[i])
+                if (data.Vehicles[i].IsAlive)
                 {
                     continue;
                 }
 
-                data.VehicleAliveStatuses[i] = true;
-                data.VehicleHealths[i] = 100;
-                data.VehiclePositions[i] = new(random.NextFloat(0, 100), random.NextFloat(0, 100));
-                data.VehicleTargets[i] = -1;
-                data.VehicleTeams[i] = teamIndex;
+                Vehicle vehicle = new Vehicle
+                {
+                    IsAlive = true,
+                    Health = 100,
+                    Position = new float2(random.NextFloat(0, 100), random.NextFloat(0, 100)),
+                    TargetIndex = -1,
+                    Team = teamIndex
+                };
+
+                data.Vehicles[i] = vehicle;
                 data.TeamAliveCounts[teamIndex]++;
 
                 unsafe

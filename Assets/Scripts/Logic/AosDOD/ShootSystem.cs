@@ -2,7 +2,7 @@
 
 using Unity.Mathematics;
 
-namespace Logic.aosDOD
+namespace Logic.AosDOD
 {
     public class ShootSystem
     {

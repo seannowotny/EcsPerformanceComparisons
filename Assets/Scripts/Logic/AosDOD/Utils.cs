@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Logic.aosDOD
+namespace Logic.AosDOD
 {
     public static class Utils
     {

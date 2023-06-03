@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Sean Nowotny
 
-namespace Logic.aosDOD
+namespace Logic.AosDOD
 {
     public class SpawnVehiclesSystem
     {
