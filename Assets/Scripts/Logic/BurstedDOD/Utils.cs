@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 namespace Logic.BurstedDOD
 {
@@ -11,7 +12,7 @@ namespace Logic.BurstedDOD
     public static class Utils
     {
         [BurstCompile]
-        public static void SpawnVehicles(int count, int teamIndex, ref Data data, float deltaTime)
+        public static void SpawnVehicles(int count, int teamIndex, ref Data data, ref Random random)
         {
             if (count == 0)
             {
@@ -19,7 +20,6 @@ namespace Logic.BurstedDOD
             }
 
             int spawned = 0;
-            Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint) (deltaTime * 100000));
 
             for (var i = 0; i < Data.MaxVehicleCount; i++)
             {
