@@ -23,11 +23,20 @@ namespace Logic.BurstedAosDOD
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 data.EnableRendering = !data.EnableRendering;
+
+                if (data.EnableRendering)
+                {
+                    RenderSystem.Initialize(prefab, materials);
+                }
+                else
+                {
+                    RenderSystem.Clear();
+                }
             }
 
             if (data.EnableRendering)
             {
-                RenderSystem.Run(prefab, materials, ref data);
+                RenderSystem.Run(ref data);
             }
         }
 

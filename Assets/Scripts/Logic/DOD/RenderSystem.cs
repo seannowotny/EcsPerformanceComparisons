@@ -8,18 +8,29 @@ namespace Logic.DOD
     {
         private static Transform[] transformPool = new Transform[Data.MaxVehicleCount];
         private static MeshRenderer[] meshPool = new MeshRenderer[Data.MaxVehicleCount];
+        private static Material[] materials;
 
-        public static void Run(GameObject prefab, Material[] materials)
+        public static void Initialize(GameObject _prefab, Material[] _materials)
         {
-            if (meshPool[0] == null)
+            materials = _materials;
+            
+            for (var i = 0; i < transformPool.Length; i++)
             {
-                for (var i = 0; i < transformPool.Length; i++)
-                {
-                    transformPool[i] = GameObject.Instantiate(prefab).transform;
-                    meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
-                }
+                transformPool[i] = GameObject.Instantiate(_prefab).transform;
+                meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
             }
+        }
 
+        public static void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
+            }
+        }
+
+        public static void Run()
+        {
             for (var i = 0; i < Data.VehiclePositions.Length; i++)
             {
                 if (!Data.VehicleAliveStatuses[i])
@@ -29,7 +40,7 @@ namespace Logic.DOD
                 }
 
                 var position = Data.VehiclePositions[i];
-                transformPool[i].position = new Vector3((float)position.x, 0, (float)position.y);
+                transformPool[i].position = new Vector3((float) position.x, 0, (float) position.y);
                 meshPool[i].enabled = true;
                 meshPool[i].material = materials[Data.VehicleTeams[i]];
             }

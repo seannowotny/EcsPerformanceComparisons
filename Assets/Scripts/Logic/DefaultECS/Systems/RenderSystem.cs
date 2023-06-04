@@ -29,10 +29,23 @@ namespace Logic.DefaultECS
 
             entities = world.GetEntities().With<PositionDC>().AsSet();
             
+            Initialize();
+        }
+        
+        public void Initialize()
+        {
             for (var i = 0; i < transformPool.Length; i++)
             {
                 transformPool[i] = GameObject.Instantiate(prefab).transform;
                 meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
+            }
+        }
+
+        public void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
             }
         }
 
