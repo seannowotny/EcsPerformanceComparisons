@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Logic.BurstedAosDOD
 {
-    public class GameHandler : MonoBehaviour
+    public class BurstedAosDodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
@@ -14,6 +14,7 @@ namespace Logic.BurstedAosDOD
         private void Start()
         {
             data = new Data(true);
+            RenderSystem.Initialize(prefab, materials);
         }
 
         private void Update()
