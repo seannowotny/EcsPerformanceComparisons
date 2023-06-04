@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Logic.BurstedDOD
 {
-    public class GameHandler : MonoBehaviour
+    public class BurstedDodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;

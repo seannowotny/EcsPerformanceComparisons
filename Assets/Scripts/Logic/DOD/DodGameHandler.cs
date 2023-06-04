@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Logic.DOD
 {
-    public class GameHandler : MonoBehaviour
+    public class DodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;

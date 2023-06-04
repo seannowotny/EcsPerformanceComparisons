@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Logic.AosDOD
 {
-    public class GameHandler : MonoBehaviour
+    public class AosDodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;

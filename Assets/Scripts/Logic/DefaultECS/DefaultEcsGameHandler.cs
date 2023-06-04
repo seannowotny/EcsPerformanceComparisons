@@ -1,45 +1,40 @@
-﻿// Copyright (c) Sean Nowotny
+// Copyright (c) Sean Nowotny
 
-using Arch.Core;
-using Arch.System;
+using DefaultEcs;
+using DefaultEcs.System;
+using Logic.DefaultECS;
 using UnityEngine;
-using Logic.Arch.Systems;
-using Unity.VisualScripting;
 
-namespace Logic.Arch
+namespace Logic.DefaultECS
 {
-    public class GameHandler : MonoBehaviour
+    public class DefaultEcsGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
 
         private World world;
-        private Group<float> systems;
+        private SequentialSystem<float> sequentialSystem;
         private RenderSystem renderSystem;
 
         private void Start()
         {
-            world = World.Create();
+            world = new World();
 
-            systems = new Group<float>(
+            sequentialSystem = new SequentialSystem<float>(
                 new SpawnVehiclesSystem(world),
                 new EnemyTargetSystem(world),
                 new VehicleMovementSystem(world),
                 new ShootSystem(world),
                 new DieSystem(world)
             );
-            systems.Initialize();
 
             renderSystem = new RenderSystem(world, prefab, materials);
-            renderSystem.Initialize();
+            world.Subscribe(this);
         }
 
         private void Update()
         {
-            var deltaTime = Time.deltaTime;
-            systems.BeforeUpdate(deltaTime);
-            systems.Update(deltaTime);
-            systems.AfterUpdate(deltaTime);
+            sequentialSystem.Update(Time.deltaTime);
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -58,12 +53,6 @@ namespace Logic.Arch
             {
                 renderSystem.Update(Time.deltaTime);
             }
-        }
-
-        private void OnDestroy()
-        {
-            systems.Dispose();
-            renderSystem.Dispose();
         }
     }
 }
