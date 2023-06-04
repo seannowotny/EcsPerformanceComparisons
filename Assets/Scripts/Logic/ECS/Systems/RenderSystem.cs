@@ -12,21 +12,49 @@ namespace Logic.ECS.Systems
     {
         private static Transform[] transformPool = new Transform[DefaultECS.Data.MaxVehicleCount];
         private static MeshRenderer[] meshPool = new MeshRenderer[DefaultECS.Data.MaxVehicleCount];
-        private bool initialized;
+
+        protected override void OnCreate()
+        {
+            Initialize();
+        }
+
+        private static void Initialize()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                transformPool[i] = GameObject.Instantiate(ManagedDataProvider.Instance.Prefab).transform;
+                meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
+            }
+        }
+
+        private void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
+            }
+        }
 
         protected override void OnUpdate()
         {
-            if (!initialized && ManagedDataProvider.Instance.Prefab != null)
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                for (var i = 0; i < transformPool.Length; i++)
+                Data.EnableRendering = !Data.EnableRendering;
+                if (Data.EnableRendering)
                 {
-                    transformPool[i] = GameObject.Instantiate(ManagedDataProvider.Instance.Prefab).transform;
-                    meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
+                    Initialize();
                 }
-
-                initialized = true;
+                else
+                {
+                    Clear();
+                }
             }
 
+            if (!Data.EnableRendering)
+            {
+                return;
+            }
+            
             using var entities = EntityManager.CreateEntityQuery(typeof(PositionDC)).ToEntityArray(Allocator.Temp);
             var entitiesCount = entities.Length;
             for (var i = 0; i < entitiesCount; i++)

@@ -39,6 +39,14 @@ namespace Logic.DefaultECS
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Data.EnableRendering = !Data.EnableRendering;
+                if (Data.EnableRendering)
+                {
+                    renderSystem.Initialize();
+                }
+                else
+                {
+                    renderSystem.Clear();
+                }
             }
 
             if (Data.EnableRendering)

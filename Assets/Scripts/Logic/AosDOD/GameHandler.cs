@@ -15,6 +15,11 @@ namespace Logic.AosDOD
             {
                 Data.TeamAliveVehicles[i] = new();
             }
+
+            if (Data.EnableRendering)
+            {
+                RenderSystem.Initialize(prefab, materials);
+            }
         }
 
         private void Update()
@@ -31,11 +36,19 @@ namespace Logic.AosDOD
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Data.EnableRendering = !Data.EnableRendering;
+                if (Data.EnableRendering)
+                {
+                    RenderSystem.Initialize(prefab, materials);
+                }
+                else
+                {
+                    RenderSystem.Clear();
+                }
             }
 
             if (Data.EnableRendering)
             {
-                RenderSystem.Run(prefab, materials);
+                RenderSystem.Run();
             }
         }
     }

@@ -8,18 +8,31 @@ namespace Logic.BurstedAosDOD
     {
         private static Transform[] transformPool = new Transform[Data.MaxVehicleCount];
         private static MeshRenderer[] meshPool = new MeshRenderer[Data.MaxVehicleCount];
+        private static Object prefab;
+        private static Material[] materials;
 
-        public static void Run(GameObject prefab, Material[] materials, ref Data data)
+        public static void Initialize(GameObject _prefab, Material[] _materials)
         {
-            if (meshPool[0] == null)
-            {
-                for (var i = 0; i < transformPool.Length; i++)
-                {
-                    transformPool[i] = GameObject.Instantiate(prefab).transform;
-                    meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
-                }
-            }
+            prefab = _prefab;
+            materials = _materials;
 
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                transformPool[i] = ((GameObject)GameObject.Instantiate(prefab)).transform;
+                meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
+            }
+        }
+
+        public static void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
+            }
+        }
+
+        public static void Run(ref Data data)
+        {
             for (var i = 0; i < data.Vehicles.Length; i++)
             {
                 if (!data.Vehicles[i].IsAlive)
@@ -29,7 +42,7 @@ namespace Logic.BurstedAosDOD
                 }
 
                 var position = data.Vehicles[i].Position;
-                transformPool[i].position = new Vector3((float)position.x, 0, (float)position.y);
+                transformPool[i].position = new Vector3((float) position.x, 0, (float) position.y);
                 meshPool[i].enabled = true;
                 meshPool[i].material = materials[data.Vehicles[i].Team];
             }
