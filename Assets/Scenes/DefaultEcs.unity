@@ -246,6 +246,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 284c1029e647bc84da2737bfe0d2b9dd, type: 2}
   - {fileID: 2100000, guid: 1195c2fe804c45742807b8e2519cb6e1, type: 2}
   - {fileID: 2100000, guid: 8def729195c8b914d8832e98f7089c70, type: 2}
+  sirenLightMaterial: {fileID: 2100000, guid: 9bb810ad7beed314fa9de0ea2ebea44f, type: 2}
 --- !u!1001 &1588725444
 PrefabInstance:
   m_ObjectHideFlags: 0
