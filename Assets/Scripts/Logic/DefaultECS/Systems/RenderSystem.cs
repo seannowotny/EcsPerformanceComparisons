@@ -32,10 +32,23 @@ namespace Logic.DefaultECS
             colorfulEntitiesSet = world.GetEntities().With<PositionDC>().Without<SirenLight>().AsSet();
             sirenLightEntitiesSet = world.GetEntities().With<PositionDC>().With<SirenLight>().AsSet();
 
+            Initialize();
+        }
+        
+        public void Initialize()
+        {
             for (var i = 0; i < transformPool.Length; i++)
             {
                 transformPool[i] = GameObject.Instantiate(prefab).transform;
                 meshPool[i] = transformPool[i].GetComponent<MeshRenderer>();
+            }
+        }
+
+        public void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
             }
         }
 

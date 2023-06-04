@@ -8,7 +8,7 @@ namespace Logic.DOD
     {
         public static void Run(float deltaTime)
         {
-            for (var i = 0; i < Data.AliveCount; i++)
+            for (var i = 0; i < Data.VehicleAliveStatuses.Length; i++)
             {
                 if (!Data.VehicleAliveStatuses[i])
                 {

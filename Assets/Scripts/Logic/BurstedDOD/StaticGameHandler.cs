@@ -14,7 +14,7 @@ namespace Logic.BurstedDOD
             VehicleMovementSystem.Run(deltaTime, ref data);
             ShootSystem.Run(deltaTime, ref data);
             
-            SpawnVehiclesSystem.Run(ref data);
+            SpawnVehiclesSystem.Run(deltaTime, ref data);
             DieSystem.Run(ref data);
         }
     }

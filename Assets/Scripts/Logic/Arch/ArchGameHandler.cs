@@ -4,10 +4,11 @@ using Arch.Core;
 using Arch.System;
 using UnityEngine;
 using Logic.Arch.Systems;
+using Unity.VisualScripting;
 
 namespace Logic.Arch
 {
-    public class GameHandler : MonoBehaviour
+    public class ArchGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
@@ -43,6 +44,14 @@ namespace Logic.Arch
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Data.EnableRendering = !Data.EnableRendering;
+                if (Data.EnableRendering)
+                {
+                    renderSystem.Initialize();
+                }
+                else
+                {
+                    renderSystem.Clear();
+                }
             }
 
             if (Data.EnableRendering)

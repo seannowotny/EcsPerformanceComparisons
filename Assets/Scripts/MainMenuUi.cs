@@ -17,13 +17,15 @@ public class MainMenuUi : MonoBehaviour
         List<(string, string)> buttonData = new()
         {
             ("DOD", "DOD"),
+            ("AoS DOD", "AosDOD"),
             ("Bursted DOD", "BurstedDOD"),
+            ("Bursted AoS DOD", "BurstedAosDOD"),
             ("DefaultEcs", "DefaultEcs"),
             ("Arch", "Arch"),
             ("Unity ECS", "Ecs")
         };
 
-        int y = 200;
+        int y = 340;
         for (var i = 0; i < buttonData.Count; i++)
         {
             PlaceButton(canvas, buttonData[i].Item1, buttonData[i].Item2, y);

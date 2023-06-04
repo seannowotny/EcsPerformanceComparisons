@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Logic.DefaultECS
 {
-    public class GameHandler : MonoBehaviour
+    public class DefaultEcsGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
@@ -42,6 +42,14 @@ namespace Logic.DefaultECS
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Data.EnableRendering = !Data.EnableRendering;
+                if (Data.EnableRendering)
+                {
+                    renderSystem.Initialize();
+                }
+                else
+                {
+                    renderSystem.Clear();
+                }
             }
 
             if (Data.EnableRendering)

@@ -34,6 +34,14 @@ namespace Logic.Arch.Systems
             }
         }
 
+        public void Clear()
+        {
+            for (var i = 0; i < transformPool.Length; i++)
+            {
+                GameObject.Destroy(transformPool[i].gameObject);
+            }
+        }
+
         public void Update(in float state)
         {
             var entitiesCount = world.CountEntities(query);

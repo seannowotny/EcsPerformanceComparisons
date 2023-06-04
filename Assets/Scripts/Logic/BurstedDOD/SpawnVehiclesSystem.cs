@@ -8,7 +8,7 @@ namespace Logic.BurstedDOD
     public static class SpawnVehiclesSystem
     {
         [BurstCompile]
-        public static void Run(ref Data data)
+        public static void Run(float deltaTime, ref Data data)
         {
             for (var i = 0; i < Data.MaxTeamCount; i++)
             {
@@ -17,7 +17,7 @@ namespace Logic.BurstedDOD
                     break;
                 }
 
-                Utils.SpawnVehicles(1, i, ref data);
+                Utils.SpawnVehicles(1, i, ref data, deltaTime);
             }
         }
     }

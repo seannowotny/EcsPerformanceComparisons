@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Logic.BurstedDOD
 {
-    public class GameHandler : MonoBehaviour
+    public class BurstedDodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
@@ -15,6 +15,7 @@ namespace Logic.BurstedDOD
         private void Start()
         {
             data = new Data(true);
+            RenderSystem.Initialize(prefab, materials);
         }
 
         private void Update()
@@ -24,11 +25,19 @@ namespace Logic.BurstedDOD
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 data.EnableRendering = !data.EnableRendering;
+                if (data.EnableRendering)
+                {
+                    RenderSystem.Initialize(prefab, materials);
+                }
+                else
+                {
+                    RenderSystem.Clear();
+                }
             }
 
             if (data.EnableRendering)
             {
-                RenderSystem.Run(prefab, materials, ref data);
+                RenderSystem.Run(ref data);
             }
         }
 

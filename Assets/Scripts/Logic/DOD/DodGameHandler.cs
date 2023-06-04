@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Logic.DOD
 {
-    public class GameHandler : MonoBehaviour
+    public class DodGameHandler : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material[] materials;
@@ -15,6 +15,11 @@ namespace Logic.DOD
             for (var i = 0; i < Data.TeamAliveVehicles.Length; i++)
             {
                 Data.TeamAliveVehicles[i] = new();
+            }
+
+            if (Data.EnableRendering)
+            {
+                RenderSystem.Initialize(prefab, materials);
             }
         }
 
@@ -32,11 +37,20 @@ namespace Logic.DOD
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 Data.EnableRendering = !Data.EnableRendering;
+
+                if (Data.EnableRendering)
+                {
+                    RenderSystem.Initialize(prefab, materials);
+                }
+                else
+                {
+                    RenderSystem.Clear();
+                }
             }
 
             if (Data.EnableRendering)
             {
-                RenderSystem.Run(prefab, materials);
+                RenderSystem.Run();
             }
         }
     }
