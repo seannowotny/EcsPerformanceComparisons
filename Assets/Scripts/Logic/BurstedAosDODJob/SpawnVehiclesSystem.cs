@@ -11,9 +11,9 @@ namespace Logic.BurstedAosDODJob
         [BurstCompile]
         public static void Run(ref Random random, ref Data data)
         {
-            for (var i = 0; i < Data.MaxTeamCount; i++)
+            for (var i = 0; i < data.MaxTeamCount; i++)
             {
-                if (data.AliveCount == Data.MaxVehicleCount)
+                if (data.AliveCount == data.MaxVehicleCount)
                 {
                     break;
                 }

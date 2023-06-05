@@ -23,16 +23,15 @@ namespace Logic.BurstedAosDODJob
         [BurstCompile]
         public void Execute()
         {
-            var data = new Data
-            {
-                AliveCount = AliveCount.Value,
-                Vehicles = Vehicles,
-                TeamAliveCounts = TeamAliveCounts,
-                Team0AliveVehicles = Team0AliveVehicles,
-                Team1AliveVehicles = Team1AliveVehicles,
-                Team2AliveVehicles = Team2AliveVehicles,
-                Team3AliveVehicles = Team3AliveVehicles
-            };
+            var data = Data.Create();
+            ref var dataRef = ref data;
+            dataRef.AliveCount = AliveCount.Value;
+            dataRef.Vehicles = Vehicles;
+            dataRef.TeamAliveCounts = TeamAliveCounts;
+            dataRef.Team0AliveVehicles = Team0AliveVehicles;
+            dataRef.Team1AliveVehicles = Team1AliveVehicles;
+            dataRef.Team2AliveVehicles = Team2AliveVehicles;
+            dataRef.Team3AliveVehicles = Team3AliveVehicles;
 
             Random random = new Random((uint) (DeltaTime * 10000000));
 

@@ -15,7 +15,7 @@ namespace Logic.BurstedAosDODJob
 
         private void Start()
         {
-            data = new Data(true);
+            data = Data.CreateWithContainers();
             RenderSystem.Initialize(prefab, materials);
         }
 
@@ -28,12 +28,12 @@ namespace Logic.BurstedAosDODJob
             {
                 DeltaTime = Time.deltaTime,
                 AliveCount = aliveCountNativeRef,
-                Vehicles = data.Vehicles,
-                TeamAliveCounts = data.TeamAliveCounts,
-                Team0AliveVehicles = data.Team0AliveVehicles,
-                Team1AliveVehicles = data.Team1AliveVehicles,
-                Team2AliveVehicles = data.Team2AliveVehicles,
-                Team3AliveVehicles = data.Team3AliveVehicles
+                Vehicles = dataRef.Vehicles,
+                TeamAliveCounts = dataRef.TeamAliveCounts,
+                Team0AliveVehicles = dataRef.Team0AliveVehicles,
+                Team1AliveVehicles = dataRef.Team1AliveVehicles,
+                Team2AliveVehicles = dataRef.Team2AliveVehicles,
+                Team3AliveVehicles = dataRef.Team3AliveVehicles
             };
             job.Run();
             dataRef.AliveCount = job.AliveCount.Value;

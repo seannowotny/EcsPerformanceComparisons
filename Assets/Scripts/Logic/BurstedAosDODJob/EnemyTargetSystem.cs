@@ -53,7 +53,7 @@ namespace Logic.BurstedAosDODJob
                 int enemyTeamIndex = 0;
                 // do
                 // {
-                enemyTeamIndex = random.NextInt(0, Data.MaxTeamCount);
+                enemyTeamIndex = random.NextInt(0, data.MaxTeamCount);
                 // } while (
                 //     enemyTeamIndex == currentTeam ||
                 //     (*Utils.TeamAliveNativeListFromIndex(enemyTeamIndex, ref data)).Length == 0

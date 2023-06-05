@@ -16,22 +16,22 @@ namespace Logic.BurstedAosDODJob
             TargetIndex = vehicle.TargetIndex;
             IsAlive = vehicle.IsAlive;
         }
-        
+
         public float2 Position;
         public float Health;
         public int Team;
         public int TargetIndex;
         public bool IsAlive;
     }
-    
+
     [BurstCompile]
     public struct Data : IDisposable
     {
-        public static readonly int MaxVehicleCount = 1000;
-        public static readonly int MaxTeamCount = 4;
-        public static readonly float WeaponRange = 5;
-        public static readonly float WeaponDamage = 100;
-        public static readonly float VehicleSpeed = 5;
+        public int MaxVehicleCount;
+        public int MaxTeamCount;
+        public float WeaponRange;
+        public float WeaponDamage;
+        public float VehicleSpeed;
 
         [MarshalAs(UnmanagedType.U1)] public bool EnableRendering;
         public int AliveCount;
@@ -45,16 +45,40 @@ namespace Logic.BurstedAosDODJob
         public NativeList<int> Team2AliveVehicles;
         public NativeList<int> Team3AliveVehicles;
 
-        public Data(bool enabledRendering = true)
+        public static Data Create(bool enabledRendering = true)
         {
-            Team3AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
-            EnableRendering = enabledRendering;
-            AliveCount = 0;
-            Vehicles = new NativeArray<Vehicle>(MaxVehicleCount, Allocator.Persistent);
-            TeamAliveCounts = new NativeArray<int>(MaxTeamCount, Allocator.Persistent);
-            Team0AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
-            Team1AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
-            Team2AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
+            return new Data
+            {
+                MaxVehicleCount = 1000,
+                MaxTeamCount = 4,
+                WeaponRange = 5,
+                WeaponDamage = 100,
+                VehicleSpeed = 5,
+                EnableRendering = enabledRendering,
+                AliveCount = 0,
+            };
+        }
+        
+        public static Data CreateWithContainers(bool enabledRendering = true)
+        {
+            int maxVehicleCount = 1000;
+            int maxTeamCount = 4;
+            return new Data
+            {
+                MaxVehicleCount = maxVehicleCount,
+                MaxTeamCount = maxTeamCount,
+                WeaponRange = 5,
+                WeaponDamage = 100,
+                VehicleSpeed = 5,
+                EnableRendering = enabledRendering,
+                AliveCount = 0,
+                Vehicles = new NativeArray<Vehicle>(maxVehicleCount, Allocator.Persistent),
+                TeamAliveCounts = new NativeArray<int>(maxTeamCount, Allocator.Persistent),
+                Team0AliveVehicles = new NativeList<int>(maxVehicleCount, Allocator.Persistent),
+                Team1AliveVehicles = new NativeList<int>(maxVehicleCount, Allocator.Persistent),
+                Team2AliveVehicles = new NativeList<int>(maxVehicleCount, Allocator.Persistent),
+                Team3AliveVehicles = new NativeList<int>(maxVehicleCount, Allocator.Persistent),
+            };
         }
 
         public void Dispose()

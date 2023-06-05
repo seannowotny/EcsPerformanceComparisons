@@ -24,13 +24,13 @@ namespace Logic.BurstedAosDODJob
                 var currentPosition = data.Vehicles[i].Position;
                 var targetPosition = data.Vehicles[currentTargetIndex].Position;
 
-                if (math.distance(currentPosition, targetPosition) < Data.WeaponRange)
+                if (math.distance(currentPosition, targetPosition) < data.WeaponRange)
                 {
                     continue;
                 }
 
                 var direction = math.normalize(targetPosition - currentPosition);
-                var newPosition = currentPosition + direction * Data.VehicleSpeed * deltaTime;
+                var newPosition = currentPosition + direction * data.VehicleSpeed * deltaTime;
 
                 var vehicle = new Vehicle(data.Vehicles[i]) {Position = newPosition};
                 data.Vehicles[i] = vehicle;

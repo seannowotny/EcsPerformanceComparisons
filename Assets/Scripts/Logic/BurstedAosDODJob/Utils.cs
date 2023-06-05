@@ -22,7 +22,7 @@ namespace Logic.BurstedAosDODJob
 
             int spawned = 0;
 
-            for (var i = 0; i < Data.MaxVehicleCount; i++)
+            for (var i = 0; i < data.MaxVehicleCount; i++)
             {
                 if (data.Vehicles[i].IsAlive)
                 {
@@ -41,10 +41,33 @@ namespace Logic.BurstedAosDODJob
                 data.Vehicles[i] = vehicle;
                 data.TeamAliveCounts[teamIndex]++;
 
-                unsafe
+                switch (teamIndex)
                 {
-                    var teamAlives = *TeamAliveNativeListFromIndex(teamIndex, ref data);
-                    teamAlives.Add(i);
+                    case 0:
+                    {
+                        data.Team0AliveVehicles.Add(i);
+                        break;
+                    }
+                    case 1:
+                    {
+                        data.Team1AliveVehicles.Add(i);
+                        break;
+                    }
+                    case 2:
+                    {
+                        data.Team2AliveVehicles.Add(i);
+                        break;
+                    }
+                    case 3:
+                    {
+                        data.Team3AliveVehicles.Add(i);
+                        break;
+                    }
+                    default:
+                    {
+                        Debug.LogError("Invalid Index");
+                        break;
+                    }
                 }
 
                 data.AliveCount++;
@@ -53,35 +76,6 @@ namespace Logic.BurstedAosDODJob
                 if (spawned == count)
                 {
                     break;
-                }
-            }
-        }
-
-        [BurstCompile]
-        public static unsafe NativeList<int>* TeamAliveNativeListFromIndex(int index, ref Data data)
-        {
-            switch (index)
-            {
-                case 0:
-                {
-                    return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team0AliveVehicles);
-                }
-                case 1:
-                {
-                    return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team1AliveVehicles);
-                }
-                case 2:
-                {
-                    return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team2AliveVehicles);
-                }
-                case 3:
-                {
-                    return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team3AliveVehicles);
-                }
-                default:
-                {
-                    Debug.LogError("Invalid Index");
-                    return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team3AliveVehicles);
                 }
             }
         }

@@ -6,8 +6,8 @@ namespace Logic.BurstedAosDODJob
 {
     public static class RenderSystem
     {
-        private static Transform[] transformPool = new Transform[Data.MaxVehicleCount];
-        private static MeshRenderer[] meshPool = new MeshRenderer[Data.MaxVehicleCount];
+        private static Transform[] transformPool = new Transform[1000]; // TODO: Replace hard-coded length
+        private static MeshRenderer[] meshPool = new MeshRenderer[1000]; // TODO: Replace hard-coded length
         private static Object prefab;
         private static Material[] materials;
 

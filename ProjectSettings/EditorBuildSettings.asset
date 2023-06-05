@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BurstedAosDOD.unity
     guid: 8aac16cabaa58064291b02a0efe1a946
+  - enabled: 1
+    path: Assets/Scenes/BurstedAosDODJob.unity
+    guid: 18c04053b8bc18d478baa9ca76b92751
   m_configObjects: {}

@@ -26,7 +26,7 @@ public class MainMenuUi : MonoBehaviour
             ("Unity ECS", "Ecs")
         };
 
-        int y = 340;
+        int y = 440;
         for (var i = 0; i < buttonData.Count; i++)
         {
             PlaceButton(canvas, buttonData[i].Item1, buttonData[i].Item2, y);
