@@ -20,6 +20,7 @@ public class MainMenuUi : MonoBehaviour
             ("AoS DOD", "AosDOD"),
             ("Bursted DOD", "BurstedDOD"),
             ("Bursted AoS DOD", "BurstedAosDOD"),
+            ("Bursted AoS DOD Job", "BurstedAosDODJob"),
             ("DefaultEcs", "DefaultEcs"),
             ("Arch", "Arch"),
             ("Unity ECS", "Ecs")

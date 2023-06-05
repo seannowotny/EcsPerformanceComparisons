@@ -9,7 +9,7 @@ namespace Logic.BurstedAosDOD
     public static class EnemyTargetSystem
     {
         [BurstCompile]
-        public static void Run(ref Data data)
+        public static void Run(ref Unity.Mathematics.Random random, ref Data data)
         {
             bool moreThanOneTeamAlive = false;
 
@@ -55,14 +55,14 @@ namespace Logic.BurstedAosDOD
                     int enemyTeamIndex = 0;
                     do
                     {
-                        enemyTeamIndex = Random.Range(0, Data.MaxTeamCount);
+                        enemyTeamIndex = random.NextInt(0, Data.MaxTeamCount);
                     } while (
                         enemyTeamIndex == currentTeam ||
                         (*Utils.TeamAliveNativeListFromIndex(enemyTeamIndex, ref data)).Length == 0
                     );
 
                     var enemyTeamList = *Utils.TeamAliveNativeListFromIndex(enemyTeamIndex, ref data);
-                    int targetIndex = enemyTeamList[Random.Range(0, enemyTeamList.Length)];
+                    int targetIndex = enemyTeamList[random.NextInt(0, enemyTeamList.Length)];
                     data.Vehicles[i] = new Vehicle(data.Vehicles[i]) {TargetIndex = targetIndex};
                 }
             }

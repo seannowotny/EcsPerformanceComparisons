@@ -12,7 +12,7 @@ namespace Logic.BurstedAosDOD
         {
             Unity.Mathematics.Random random = new Unity.Mathematics.Random((uint) (deltaTime * 10000000));
             
-            EnemyTargetSystem.Run(ref data);
+            EnemyTargetSystem.Run(ref random, ref data);
             VehicleMovementSystem.Run(deltaTime, ref data);
             ShootSystem.Run(deltaTime, ref data);
             
