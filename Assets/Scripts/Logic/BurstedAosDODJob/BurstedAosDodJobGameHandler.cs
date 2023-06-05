@@ -12,6 +12,9 @@ namespace Logic.BurstedAosDODJob
         [SerializeField] private Material[] materials;
 
         private Data data;
+        private GameHandlerJob job;
+        private bool initialized;
+        private JobHandle jobHandle;
 
         private void Start()
         {
@@ -22,21 +25,14 @@ namespace Logic.BurstedAosDODJob
         private void Update()
         {
             ref var dataRef = ref data;
-            var aliveCountNativeRef = new NativeReference<int>(Allocator.TempJob);
-            aliveCountNativeRef.Value = dataRef.AliveCount;
-            var job = new GameHandlerJob
+
+            if (initialized)
             {
-                DeltaTime = Time.deltaTime,
-                AliveCount = aliveCountNativeRef,
-                Vehicles = dataRef.Vehicles,
-                TeamAliveCounts = dataRef.TeamAliveCounts,
-                Team0AliveVehicles = dataRef.Team0AliveVehicles,
-                Team1AliveVehicles = dataRef.Team1AliveVehicles,
-                Team2AliveVehicles = dataRef.Team2AliveVehicles,
-                Team3AliveVehicles = dataRef.Team3AliveVehicles
-            };
-            job.Run();
-            dataRef.AliveCount = job.AliveCount.Value;
+                jobHandle.Complete();
+                dataRef.AliveCount = job.AliveCount.Value;
+            }
+
+            initialized = true;
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
@@ -56,6 +52,21 @@ namespace Logic.BurstedAosDODJob
             {
                 RenderSystem.Run(ref dataRef);
             }
+
+            var aliveCountNativeRef = new NativeReference<int>(Allocator.TempJob);
+            aliveCountNativeRef.Value = dataRef.AliveCount;
+            job = new GameHandlerJob
+            {
+                DeltaTime = Time.deltaTime,
+                AliveCount = aliveCountNativeRef,
+                Vehicles = dataRef.Vehicles,
+                TeamAliveCounts = dataRef.TeamAliveCounts,
+                Team0AliveVehicles = dataRef.Team0AliveVehicles,
+                Team1AliveVehicles = dataRef.Team1AliveVehicles,
+                Team2AliveVehicles = dataRef.Team2AliveVehicles,
+                Team3AliveVehicles = dataRef.Team3AliveVehicles
+            };
+            jobHandle = job.Schedule();
         }
 
         private void OnDestroy()
