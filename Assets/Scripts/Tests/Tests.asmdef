@@ -3,7 +3,9 @@
     "rootNamespace": "Pisces",
     "references": [
         "Unity.Mathematics",
-        "DefaultECSLogic"
+        "DefaultECSLogic",
+        "BurstedAosDODLogic",
+        "Unity.Collections"
     ],
     "includePlatforms": [
         "Editor"

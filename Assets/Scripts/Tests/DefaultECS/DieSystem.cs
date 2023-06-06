@@ -1,10 +1,9 @@
 using DefaultEcs;
-using NUnit.Framework;
 using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
-using Pisces.Tests;
+using NUnit.Framework;
 
-namespace Tests
+namespace Pisces.Tests.DefaultECS
 {
     public class DieSystemTests
     {

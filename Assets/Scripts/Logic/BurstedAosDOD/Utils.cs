@@ -20,15 +20,8 @@ namespace Logic.BurstedAosDOD
                 return;
             }
 
-            int spawned = 0;
-
-            for (var i = 0; i < Data.MaxVehicleCount; i++)
+            for (var i = 0; i < count; i++)
             {
-                if (data.Vehicles[i].IsAlive)
-                {
-                    continue;
-                }
-
                 Vehicle vehicle = new Vehicle
                 {
                     IsAlive = true,
@@ -38,22 +31,7 @@ namespace Logic.BurstedAosDOD
                     Team = teamIndex
                 };
 
-                data.Vehicles[i] = vehicle;
-                data.TeamAliveCounts[teamIndex]++;
-
-                unsafe
-                {
-                    var teamAlives = *TeamAliveNativeListFromIndex(teamIndex, ref data);
-                    teamAlives.Add(i);
-                }
-
-                data.AliveCount++;
-
-                spawned++;
-                if (spawned == count)
-                {
-                    break;
-                }
+                CreateVehicle(ref data, vehicle);
             }
         }
 
@@ -83,6 +61,74 @@ namespace Logic.BurstedAosDOD
                     Debug.LogError("Invalid Index");
                     return (NativeList<int>*) UnsafeUtility.AddressOf(ref data.Team3AliveVehicles);
                 }
+            }
+        }
+
+        [BurstCompile]
+        public static void DisposeVehicle(ref Data data, int index)
+        {
+            UpdateAliveDataForVehicle(ref data, index, false);
+        }
+
+
+        [BurstCompile]
+        public static void CreateVehicle(ref Data data, in Vehicle vehicle)
+        {
+            if (data.AliveCount == Data.MaxVehicleCount)
+            {
+                return;
+            }
+
+            {
+                bool isSpawnableIndex = false;
+                for (var i = data.LastSpawnableVehicleIndex; i < data.Vehicles.Length; i++)
+                {
+                    if (data.Vehicles[i].IsAlive)
+                    {
+                        continue;
+                    }
+
+                    data.LastSpawnableVehicleIndex = i;
+                    isSpawnableIndex = true;
+                    break;
+                }
+
+                if (!isSpawnableIndex)
+                {
+                    for (var i = 0; i < data.Vehicles.Length; i++)
+                    {
+                        if (data.Vehicles[i].IsAlive)
+                        {
+                            continue;
+                        }
+
+                        data.LastSpawnableVehicleIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            UpdateAliveDataForVehicle(ref data, data.LastSpawnableVehicleIndex, true);
+            data.Vehicles[data.LastSpawnableVehicleIndex] = vehicle;
+        }
+
+        [BurstCompile]
+        private static unsafe void UpdateAliveDataForVehicle(ref Data data, int index, bool alive)
+        {
+            data.Vehicles[index] = new(data.Vehicles[index]) {IsAlive = alive};
+            int team = data.Vehicles[index].Team;
+            var val = alive ? 1 : -1;
+            data.TeamAliveCounts[team] += val;
+            data.AliveCount += val;
+
+            var teamAliveList = *TeamAliveNativeListFromIndex(team, ref data);
+            if (alive)
+            {
+                teamAliveList.Add(index);
+            }
+            else
+            {
+                teamAliveList.RemoveAt(teamAliveList.IndexOf(index));
             }
         }
     }

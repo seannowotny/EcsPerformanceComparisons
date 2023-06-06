@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
-using DefaultEcs;
+﻿using DefaultEcs;
 using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
-using Pisces.Tests;
+using NUnit.Framework;
 using Unity.Mathematics;
 
-namespace Tests
+namespace Pisces.Tests.DefaultECS
 {
     public class VehicleMovementSystemTests
     {

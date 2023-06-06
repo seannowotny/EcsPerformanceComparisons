@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
 using DefaultEcs;
 using Logic.DefaultECS;
 using Logic.DefaultECS.Components;
-using System.Linq;
-using Pisces.Tests;
+using NUnit.Framework;
 
-namespace Tests
+namespace Pisces.Tests.DefaultECS
 {
     public class EnemyTargetSystemTests
     {

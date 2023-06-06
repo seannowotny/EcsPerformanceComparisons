@@ -27,6 +27,7 @@ namespace Logic.BurstedAosDOD
     [BurstCompile]
     public struct Data : IDisposable
     {
+        public int LastSpawnableVehicleIndex;
         public static readonly int MaxVehicleCount = 1000;
         public static readonly int MaxTeamCount = 4;
         public static readonly float WeaponRange = 5;
@@ -47,6 +48,7 @@ namespace Logic.BurstedAosDOD
 
         public Data(bool enabledRendering = true)
         {
+            LastSpawnableVehicleIndex = 0;
             Team3AliveVehicles = new NativeList<int>(MaxVehicleCount, Allocator.Persistent);
             EnableRendering = enabledRendering;
             AliveCount = 0;

@@ -22,16 +22,7 @@ namespace Logic.BurstedAosDOD
                     continue;
                 }
 
-                data.Vehicles[i] = new Vehicle(vehicle) {IsAlive = false};
-                
-                unsafe
-                {
-                    var teamLives = *Utils.TeamAliveNativeListFromIndex(vehicle.Team, ref data);
-                    teamLives.RemoveAt(teamLives.IndexOf(i));
-                }
-                
-                data.TeamAliveCounts[vehicle.Team]--;
-                data.AliveCount--;
+                Utils.DisposeVehicle(ref data, i);
             }
         }
     }
