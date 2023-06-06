@@ -26,7 +26,6 @@ namespace Logic.BurstedDOD
 
         public NativeArray<int> TeamAliveCounts;
 
-        // TODO: Use flattened list of lists instead
         public NativeList<int> Team0AliveVehicles;
         public NativeList<int> Team1AliveVehicles;
         public NativeList<int> Team2AliveVehicles;

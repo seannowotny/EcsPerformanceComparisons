@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Sean Nowotny
 
 using Unity.Burst;
+using Unity.Mathematics;
 
 namespace Logic.BurstedDOD
 {
@@ -8,7 +9,7 @@ namespace Logic.BurstedDOD
     public static class SpawnVehiclesSystem
     {
         [BurstCompile]
-        public static void Run(ref Data data)
+        public static void Run(ref Random random, ref Data data)
         {
             for (var i = 0; i < Data.MaxTeamCount; i++)
             {
@@ -17,7 +18,7 @@ namespace Logic.BurstedDOD
                     break;
                 }
 
-                Utils.SpawnVehicles(1, i, ref data);
+                Utils.SpawnVehicles(1, i, ref data, ref random);
             }
         }
     }

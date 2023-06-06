@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 namespace Logic.BurstedDOD
 {
@@ -11,7 +12,7 @@ namespace Logic.BurstedDOD
     public static class Utils
     {
         [BurstCompile]
-        public static void SpawnVehicles(int count, int teamIndex, ref Data data)
+        public static void SpawnVehicles(int count, int teamIndex, ref Data data, ref Random random)
         {
             if (count == 0)
             {
@@ -19,6 +20,7 @@ namespace Logic.BurstedDOD
             }
 
             int spawned = 0;
+
             for (var i = 0; i < Data.MaxVehicleCount; i++)
             {
                 if (data.VehicleAliveStatuses[i])
@@ -28,7 +30,7 @@ namespace Logic.BurstedDOD
 
                 data.VehicleAliveStatuses[i] = true;
                 data.VehicleHealths[i] = 100;
-                data.VehiclePositions[i] = new(Random.Range(0, 100), Random.Range(0, 100));
+                data.VehiclePositions[i] = new(random.NextFloat(0, 100), random.NextFloat(0, 100));
                 data.VehicleTargets[i] = -1;
                 data.VehicleTeams[i] = teamIndex;
                 data.TeamAliveCounts[teamIndex]++;

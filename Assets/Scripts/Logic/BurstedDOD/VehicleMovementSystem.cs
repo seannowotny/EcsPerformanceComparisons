@@ -8,7 +8,7 @@ namespace Logic.BurstedDOD
     {
         public static void Run(float deltaTime, ref Data data)
         {
-            for (var i = 0; i < data.AliveCount; i++)
+            for (var i = 0; i < data.VehicleAliveStatuses.Length; i++)
             {
                 if (!data.VehicleAliveStatuses[i])
                 {
