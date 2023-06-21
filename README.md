@@ -20,7 +20,7 @@ Rendering systems are currently GameObject-based and slow, but can be disabled b
 
 [![Video Demo](https://img.youtube.com/vi/rrW4-jHXLG0/0.jpg)](https://www.youtube.com/watch?v=rrW4-jHXLG0)
 
-## Results
+## Profile Analyzer Results
 
 Below is the performance comparison table. All values are in milliseconds.
 
