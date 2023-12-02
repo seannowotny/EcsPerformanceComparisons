@@ -6,7 +6,7 @@ The implementations emphasize simplicity and productivity over highly optimized,
 
 Rendering systems are currently GameObject-based and slow, but can be disabled by pressing the space bar.
 
-This project spawns 1000 Entities to match my own requirements. This is why the benchmarks results of different data-oriented solutions are so similar.
+This project spawns 1000 Entities to match my own requirements. This is why the benchmark results of different data-oriented solutions are so similar.
 
 With higher entity counts bigger differences should be become apparent.
 
